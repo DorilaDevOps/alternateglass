@@ -9,60 +9,93 @@
     <meta property="og:title" content="Alternate Glass - Lentes Originales Premium">
     <meta property="og:description" content="Descubre nuestra colección exclusiva de lentes originales con estilo preppy y diseño minimalista">
     <meta property="og:type" content="website">
-	<meta property="og:image" content="logo1.png" />
-	<link rel="shortcut icon" href="logo1.png" type="image/jpg">
+	<meta property="og:image" content="imgs/logo1.png" />
+	<link rel="shortcut icon" href="imgs/logo1.png" type="image/jpg">
     <title>Alternate Glass - Lentes Originales Premium | Eyewear de Diseñador</title>
-    
+	
     <style>
+        /* ============================================
+           CSS VARIABLES
+        ============================================ */
         :root {
-            --color-primary: #f8f9fa;
-            --color-secondary: #e9ecef;
-            --color-accent: #4a5568;
-            --color-text: #2d3748;
-            --color-text-light: #718096;
-            --color-border: #cbd5e0;
-            --color-bg: #ffffff;
-            --color-overlay: rgba(0, 0, 0, 0.5);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-			--color_rosado:rgb(255, 155, 255);
+            --color-primary: #450b6d;
+            --color-secondary: #ffffff;
+            --color-text: #1a1a1a;
+            --color-text-light: #666666;
+            --color-border: #e0e0e0;
+            --color-bg: #0f141969;
 			--verde_whatsapp:#25D366;
 			--verde_whatsapp_transparent:#25d36675;
+			--color_rosado:rgb(255, 155, 255);
+			--color-overlay: rgba(0, 0, 0, 0.5);
+			--color-overlay2: rgb(241 231 243 / 50%);
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --transition: all 0.4s ease;
+			 --transition2: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        [data-theme="dark"] {
+		[data-theme="dark"] {
             --color-primary: #1a202c;
             --color-secondary: #2d3748;
             --color-accent: #cbd5e0;
             --color-text: #e2e8f0;
             --color-text-light: #a0aec0;
             --color-border: #4a5568;
-            --color-bg: #0f1419;
+            --color-bg: #0f1419b3;
             --color-overlay: rgba(255, 255, 255, 0.1);
+			--color-overlay2:rgb(31 12 34 / 50%);
         }
 
+        /* ============================================
+           RESET & BASE
+        ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-		a{color:var(--color-accent);transition: all ease .6s;}
-		a:hover{transform: scale(1.2);color:var(--color_rosado);font-size: 1.2em;}
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: var(--font-sans);
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.6;
-            transition: var(--transition);
+            overflow-x: hidden;
+            transition: var(--transition2);
+			position:relative;
         }
-
-        /* Header */
+		h1{
+			font-size: 0.6em;-webkit-text-stroke-width: 0.7px;
+			-webkit-text-stroke-color: black;
+			text-transform: uppercase;
+			text-shadow: rgb(0, 0, 0) 2px 2px 4px;
+			font-weight: 500;			
+			line-height: 1.2;
+			white-space: nowrap;
+		}
+		
+		h2 {
+			color:var(--color_rosado);
+            font-size: 1.3em;
+            margin-bottom: 2rem;
+			-webkit-text-stroke-color: black;
+			text-shadow: rgb(0, 0, 0) 1px 2px 2px;
+            text-align: center;
+            font-weight: 200;
+        }
+		h3{ color:var(--color_rosado)}
+		
+		/* Header */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             background-color: var(--color-bg);
             border-bottom: 1px solid var(--color-border);
+			filter: blur(.3px);
             z-index: 1000;
             transition: var(--transition);
         }
@@ -92,12 +125,13 @@
 		}
 		
 		.logo h1{ font-size:1.2em;}
-
-        .nav-links {
+		.nav-links {
             display: none;
             gap: 2rem;
             list-style: none;
         }
+		
+		a{text-decoration: none; color:var(--color-text-light);}
 
         .nav-links a {
             color: var(--color-text);
@@ -123,8 +157,7 @@
             font-size: 1.5rem;
             transition: var(--transition);
         }
-
-        .menu-toggle {
+		.menu-toggle {
             background: none;
             border: none;
             font-size: 1.5rem;
@@ -135,21 +168,21 @@
 
         .mobile-menu {
             position: fixed;
-            top: 0;
-            right: -100%;
+            top: -100%;
             width: 70%;
-            height: 100vh;
-            background-color: var(--color-bg);
+            height: 30vh;
+            background-color: var(--color-text-light);
             padding: 5rem 2rem 2rem;
             transition: var(--transition);
             box-shadow: -2px 0 10px var(--color-overlay);
         }
 
         .mobile-menu.active {
+			top:10%;
             right: 0;
 			z-index: 20;
         }
-
+		
         .mobile-menu ul {
             list-style: none;
             display: flex;
@@ -175,215 +208,234 @@
             color: var(--color-text);
         }
 
-        /* Main Content */
-        main {
-            margin-top: 60px;
-            padding: 1rem;
-        }
 
-        section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 0;
+        /* ============================================
+           SLIDER CONTAINER
+        ============================================ */
+        .slider-wrapper {
+			margin-top: 60px;
+            width: 100%;
+            min-height: 100vh;
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-
-        h2 {
-		color:var(--color_rosado);
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
+		
+        .slider-container {
             position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            aspect-ratio: 1;
-            background-color: var(--color-secondary);
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
-        .gallery-item img {
+        .slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) 0;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        .slider::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+		
+		.slider-wrapper h3 {text-align:center;}
+
+
+        /* ============================================
+           PRODUCT CARD
+        ============================================ */
+        .product-card {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            background: var(--color-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ============================================
+           IMAGE CONTAINER
+        ============================================ */
+        .image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--color-bg);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .image-container:hover {
+            opacity: 0.9;
+        }
+
+        .product-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
             opacity: 0;
+            transition: opacity 0.6s ease;
         }
 
-        .gallery-item img.loaded {
+        .product-image.loaded {
             opacity: 1;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-item-overlay {
+        /* Skeleton loader */
+        .image-container::before {
+            content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, var(--color-overlay), transparent);
-            padding: 1.5rem;
-            color: white;
-            transform: translateY(100%);
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover .gallery-item-overlay {
-            transform: translateY(0);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--color-overlay);
-            z-index: 2000;
-            padding: 1rem;
-            overflow-y: auto;
+            background: linear-gradient(
+                90deg,
+                var(--color-bg) 0%,
+                #e8e8e8 50%,
+                var(--color-bg) 100%
+            );
+            background-size: 200% 100%;
+            animation: loading 1.5s ease-in-out infinite;
         }
 
-        .modal.active {
-            display: flex;
+        .image-container.loaded::before {
+            display: none;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Badge */
+        .product-badge {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: var(--color-primary);
+            color: var(--color-secondary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           CARD CONTENT
+        ============================================ */
+        .card-content {
+            padding: var(--spacing-md);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+        .product-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
+        }
+
+        .product-description {
+            font-size: 0.938rem;
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .product-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+        }
+		
+		/*-- section  -- MAIN   ---*/
+		section {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+            width: 90%;
+            margin: 0 auto;
+            padding: 3rem 0;
+			background: var(--color-overlay2);
+			opacity: 1;
+			transform: translateY(2px);
+			transition: opacity 0.6s, transform 0.6s;
+        }
+		
+
+        /* ============================================
+           BUTTON
+        ============================================ */
+        .btn-whatsapp {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .modal-content {
-            background-color: var(--color-bg);
-            border-radius: 16px;
-            max-width: 500px;
+            gap: var(--spacing-xs);
             width: 100%;
-            padding: 2rem;
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--color-text);
-        }
-
-        .modal-image {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .modal-price {
-            font-size: 1.5rem;
-            color: var(--color-accent);
-            font-weight: 600;
-            margin: 1rem 0;
-        }
-
-        .modal-description {
-            color: var(--color-text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-cta {
-            width: 100%;
-            padding: 1rem;
-            background-color: var(--color-accent);
-            color: white;
-            border: none;
-            border-radius: 8px;
+            padding: var(--spacing-md);
+            background: transparent;
+            color: var(--verde_whatsapp);
+            text-decoration: none;
             font-size: 1rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-cta:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        /* Contact Form */
-        #contacto {
-            background-color: var(--color-primary);
-            border-radius: 16px;
-            padding: 3rem 1.5rem;
-        }
-
-        .contact-form {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-		.contact-details{
-			text-align: center;
-			font-size: 1.2em;
-		}
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        label {
-            font-weight: 500;
-            color: var(--color-text);
-        }
-
-        input, textarea {
-            padding: 0.75rem;
-            border: 1px solid var(--color-border);
             border-radius: 8px;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            font-family: inherit;
+            border: 2px solid var(--verde_whatsapp);
             transition: var(--transition);
+			max-width:80%;
         }
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--color-accent);
+        .btn-whatsapp:hover {
+            background: var(--color-secondary);
+			border-color:red;
+			color:red;
+			transform:scale(1.2);
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 120px;
+        .btn-whatsapp svg {
+            width: 20px;
+            height: 20px;
+			transition: all .3s ease;
         }
+		.btn-whatsapp:hover svg{transform:scale(1.2); color:red;}
+		
 		 /* WhatsApp flotante */
         .whatsapp-btn {
             position: fixed;
@@ -404,14 +456,13 @@
             z-index: 21;
             transition: var(--transition-default);
         }
-        
-        .whatsapp-btn:hover {
+		 .whatsapp-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
 			background-color: var(--verde_whatsapp);
         }
 
-        /* Footer */
+        /*---------- Footer ----------------------------------*/
         footer {
             background-color: var(--color-secondary);
             padding: 2rem 1rem;
@@ -419,9 +470,229 @@
             color: var(--color-text-light);
         }
 
-        /* Responsive */
-        @media (min-width: 768px) {
-            .nav-links {
+        /* ============================================
+           NAVIGATION DOTS
+        ============================================ */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-sm) 0;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--color-primary);
+        }
+
+        /* ============================================
+           SCROLL INDICATORS
+        ============================================ */
+        .scroll-indicator {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--color-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .scroll-indicator:hover {
+            background: var(--color-primary);
+            color: var(--color-secondary);
+        }
+
+        .scroll-indicator.left {
+            left: var(--spacing-sm);
+        }
+
+        .scroll-indicator.right {
+            right: var(--spacing-sm);
+        }
+
+        /* ============================================
+           OVERLAY MODAL
+        ============================================ */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--color-text);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: var(--spacing-xs);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+			top: 50px;
+        }
+
+        .overlay-content {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            max-height: 95dvh;
+            overflow-y: auto;
+            background: var(--color-secondary);
+            border-radius: 16px;
+            padding: var(--spacing-sm);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .overlay.active .overlay-content {
+            transform: scale(1);
+        }
+
+        .overlay-close {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            color: var(--color-secondary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .overlay-close:hover {
+            transform: rotate(90deg);
+            background: var(--color-text);
+        }
+
+        .overlay-images {
+            display: grid;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .overlay-image-container {
+            position: relative;
+            width: 100%;
+            background: var(--color-bg);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .overlay-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .overlay-image-label {
+            position: absolute;
+            bottom: var(--spacing-sm);
+            left: var(--spacing-sm);
+            background: var(--color-overlay2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .overlay-info {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .overlay-info .product-name {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .overlay-info .product-title {
+            font-size: 1.75rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .overlay-info .product-description {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .overlay-info .product-price {
+            margin-bottom: var(--spacing-lg);
+        }
+
+		@keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (min-width: 640px) {
+            .slider-wrapper {
+                padding: var(--spacing-lg);
+            }
+
+            .product-card {
+                flex: 0 0 calc(50% - var(--spacing-sm));
+            }
+
+            .card-content {
+                padding: var(--spacing-lg);
+            }
+
+            .product-title {
+                font-size: 1.75rem;
+            }
+			 .nav-links {
                 display: flex;
             }
 
@@ -429,36 +700,49 @@
                 display: none;
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-
             h2 {
-                font-size: 2.5rem;
+                font-size: 1.6em;
             }
         }
 
         @media (min-width: 1024px) {
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .slider-container {
+                max-width: 1200px;
             }
 
-            nav {
-                padding: 1.5rem 2rem;
+            .product-card {
+                flex: 0 0 calc(33.333% - var(--spacing-md));
+            }
+
+            .scroll-indicator {
+                opacity: 1;
+                pointer-events: all;
+            }
+			h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .product-card {
+                flex: 0 0 calc(25% - var(--spacing-md));
+            }
+			h2 {
+                font-size: 2.4em;
             }
         }
     </style>
 </head>
 <body>
+
     <header>
         <nav>
             <div class="logo">
-			<img src="logo1.png"alt="logo" />
+			<img src="imgs/logo1.png"alt="logo" />
 			<h1>Alternate Glass</h1>
 			</div>
             <ul class="nav-links">
-                <li><a href="#productos">Productos</a></li>
+                <li><a href="#slider">Productos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
             <div class="nav-actions">
@@ -471,68 +755,58 @@
     <div class="mobile-menu">
         <button class="close-menu" aria-label="Cerrar menú">×</button>
         <ul>
-            <li><a href="#productos">Productos</a></li>
+            <li><a href="#slider">Productos</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
     </div>
+	
+    <div class="slider-wrapper">
+	<h2> Colección actual disponible</h2>
+	<h3> Shop the Look</h3>
+        <div class="slider-container">
+            <!-- Scroll Indicators -->
+            <button class="scroll-indicator left" id="scrollLeft" aria-label="Scroll left">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="scroll-indicator right" id="scrollRight" aria-label="Scroll right">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
 
-    <main>
-        <section id="productos">
-            <h2>Nuestra Colección</h2>
-            <div class="gallery-grid">
-                <article class="gallery-item" data-product="classic">
-                    <img data-src="01 (1).jpg" alt="Lentes Classic Round - Diseño atemporal preppy">
-                    <div class="gallery-item-overlay">
-                        <h3>Classic Round</h3>
-                        <p>Diseño atemporal</p>
-                    </div>
-                </article>
-
-                <article class="gallery-item" data-product="modern">
-                    <img data-src="05 (1).jpg" alt="Lentes Modern Edge - Estilo contemporáneo preppy">
-                    <div class="gallery-item-overlay">
-                        <h3>Modern Edge</h3>
-                        <p>Estilo contemporáneo</p>
-                    </div>
-                </article>
-
-                <article class="gallery-item" data-product="aviator">
-                    <img data-src="09 (2).jpg" alt="Lentes Aviator Luxe - Elegancia clásica preppy">
-                    <div class="gallery-item-overlay">
-                        <h3>Aviator Luxe</h3>
-                        <p>Elegancia clásica</p>
-                    </div>
-                </article>
-
-                <article class="gallery-item" data-product="minimal">
-                    <img data-src="08 (1).jpg" alt="Lentes Minimal Chic - Minimalismo sofisticado">
-                    <div class="gallery-item-overlay">
-                        <h3>Minimal Chic</h3>
-                        <p>Minimalismo sofisticado</p>
-                    </div>
-                </article>
-
-                <article class="gallery-item" data-product="retro">
-                    <img data-src="16 (1).jpg" alt="Lentes Retro Square - Vintage reinventado preppy">
-                    <div class="gallery-item-overlay">
-                        <h3>Retro Square</h3>
-                        <p>Vintage reinventado</p>
-                    </div>
-                </article>
-
-                <article class="gallery-item" data-product="sport">
-                    <img data-src="14 (1).jpg" alt="Lentes Sport Elite - Performance y estilo preppy">
-                    <div class="gallery-item-overlay">
-                        <h3>Sport Elite</h3>
-                        <p>Performance y estilo</p>
-                    </div>
-                </article>
+            <!-- Slider -->
+            <div class="slider" id="slider">
+                <!-- Products will be loaded here by JavaScript -->
             </div>
-        </section>
 
-        <section id="contacto">
+            <!-- Navigation Dots -->
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </div>
+
+    <!-- Overlay Modal -->
+    <div class="overlay" id="imageOverlay">
+        <div class="overlay-content">
+            <button class="overlay-close" id="overlayClose" aria-label="Close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="overlay-images" id="overlayImages">
+                <!-- Images will be loaded here -->
+            </div>
+            <div class="overlay-info" id="overlayInfo">
+                <!-- Product info will be loaded here -->
+            </div>
+        </div>
+    </div>
+	<main style="display:flex;flex-direction:column;">
+	 <section id="contacto" class="contacto">
 		<h2 class="section-badge">Encontrá tu próximo par favorito</h2> 
-            <h2>Contactanos  y que fluya</h2>
+            <h3>Contactanos  y que fluya</h3>
 						<div class="contact-details">
                         <p><strong>📞 </strong><a href="tel:094872605">094 872 605</a></p>
                         <p><strong>📩</strong> <a href="mailto:destinatario@ejemplo.com?subject=Hola&body=Informa%20Lentes">kikiriyadevops@gmail.com</a></p>
@@ -541,78 +815,451 @@
 							
         </section>
     </main>
-
-    <div class="modal">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Cerrar">×</button>
-            <img class="modal-image" src="" alt="">
-            <h3 class="modal-title"></h3>
-            <div class="modal-price"></div>
-            <p class="modal-description"></p>
-            <button class="btn-cta">Solicitar Información</button>
-        </div>
-    </div>
 	
 	<!-- Botón WhatsApp flotante -->
-    <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+    <a href="https://wa.me/598094872605" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-											style="width: 110%; height: 110%; fill: rgb(255, 155, 255); stroke: none;">
+											style="width: 100%; height: 100%; fill: rgb(255, 155, 255); stroke: none;">
 											 <path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z">
 											 </path>
 										 </svg>
     </a>
 
     <footer>
-        <p>&copy; 2025 Alternate Glass. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Alternate Glass. 👽 Todos los derechos reservados.</p>
     </footer>
+	
+	
 
     <script>
-        const products = {
-            classic: {
-                title: 'Classic Round',
-                price: '$189',
-                description: 'Montura redonda de acetato premium con detalles dorados. Perfecta para un look preppy atemporal. Incluye protección UV400 y lentes polarizados.',
-				 src: "01 (1).jpg",
-				 image2: "01 (2).jpg",
+        // ============================================
+        // PRODUCTS DATA
+        // ============================================
+        const products = [
+            {
+                id: 1,
+                name: "🕶️",
+                title: "INFINIT",
+                description: "Lentes originales para miradas con propósito",
+                price: "$4,500",
+                badge: "Nuevo",
+                image:"imgs/02 (1).jpg",
+                imageAlt:"imgs/02 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: INFINIT"
             },
-            modern: {
-                title: 'Modern Edge',
-                price: '$219',
-                description: 'Diseño geométrico contemporáneo con líneas limpias. Materiales hipoalergénicos y ajuste ergonómico. Ideal para el uso diario.',
-				 image: "02 (1).jpg",
-				 image2: "02 (2).jpg",
+            {
+                id: 3,
+                name: "🕶️",
+                title: "RALPH LAUREN",
+                description: "Minimalistas, modernos y 100% reales.",
+                price: "$3,800",
+                badge: "All day",
+                image:"imgs/04 (1).jpg",
+                imageAlt:"imgs/04 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: RALPH LAUREN"
             },
-            aviator: {
-                title: 'Aviator Luxe',
-                price: '$249',
-                description: 'El clásico aviador reinventado con materiales premium. Marco de titanio ligero con lentes de cristal. Elegancia garantizada.',
-				 image: "03 (1).jpg",
-				 image2: "03 (2).jpg",
+            {
+                id: 6,
+                name: "🕶️",
+                title: "VERSALLES",
+                description: "Protegé tu mirada, mostrale actitud.",
+                price: "$3,200",
+                badge: "Trending",
+                image:"imgs/07 (1).jpg",
+                imageAlt:"imgs/07 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: VERSALLES"
             },
-            minimal: {
-                title: 'Minimal Chic',
-                price: '$199',
-                description: 'Montura minimalista sin bordes con cristales de alta definición. Diseño ultraligero para máximo confort. Sofisticación en su forma más pura.',
-				 src: "04 (1).jpg",
-				 image2: "04 (2).jpg",
+            {
+                id: 2,
+                name: "🕶️",
+                title: "INFINIT",
+                description: "Autenticidad en cada mirada.",
+                price: "$5,200",
+                badge: "I prefer",
+                image:"imgs/03 (1).jpg",
+                imageAlt:"imgs/03 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: INFINIT"
             },
-            retro: {
-                title: 'Retro Square',
-                price: '$179',
-                description: 'Inspirado en los años 70 con un toque moderno. Acetato italiano de alta calidad. Perfectas para destacar con estilo vintage preppy.',
-				 image: "05 (1).jpg",
-				 image2: "05 (2).jpg",
+            {
+                id: 7,
+                name: "🕶️",
+                title: "VERSALLES",
+                description: "Lentes originales que lo confirman.",
+                price: "$5,200",
+                badge: "I prefer",
+                image:"imgs/08 (1).jpg",
+                imageAlt:"imgs/08 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: VERSALLES"
             },
-            sport: {
-                title: 'Sport Elite',
-                price: '$239',
-                description: 'Tecnología deportiva con diseño elegante. Marco flexible TR90 y lentes fotocromáticas. Para quienes no renuncian al estilo activo.',
-				 image: "06 (1).jpg",
-				 image2: "06 (2).jpg",
+            {
+                id: 8,
+                name: "🕶️",
+                title: "MYTHO",
+                description: "Lentes premium con presencia y personalidad.",
+                price: "$1800",
+                badge: "All day",
+                image:"imgs/09 (1).jpg",
+                imageAlt:"imgs/09 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: MYTHO"
+            },
+            {
+                id: 9,
+                name: "🕶️",
+                title: "MDQ",
+                description: "Modelo icónico con diseño atemporal. Perfectas para el uso diario con estilo.",
+                price: "$4,100",
+                badge: "Clásico",
+                image:"imgs/10 (1).jpg",
+                imageAlt:"imgs/10 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: MDQ"
+            },
+            {
+                id: 4,
+                name: "🕶️",
+                title: "VERSALLES",
+                description: "Modelo icónico con diseño atemporal. Perfectos para el uso diario con estilo.",
+                price: "$4,100",
+                badge: "Clásico",
+                image:"imgs/05 (1).jpg",
+                imageAlt:"imgs/05 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: VERSALLES"
+            },
+            {
+                id: 10,
+                name: "🕶️",
+                title: "INFINIT",
+                description: "Lentes originales que hablan de tu estilo sin decir una palabra.",
+                price: "$2,900",
+                badge: "Bestseller",
+                image:"imgs/11 (1).jpg",
+                imageAlt:"imgs/11 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: INFINIT"
+            },
+            {
+                id: 11,
+                name: "🕶️",
+                title: "INFINIT",
+                description: "Un toque de sol, una dosis de actitud.",
+                price: "$3,200",
+                badge: "Trending",
+                image:"imgs/12 (1).jpg",
+                imageAlt:"imgs/12 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: INFINIT"
+            },
+            {
+                id: 12,
+                name: "🕶️",
+                title: "PEOPLE",
+                description: "No sigas tendencias, crealas.",
+                price: "$5,200",
+                badge: "I prefer",
+                image:"imgs/13 (1).jpg",
+                imageAlt:"imgs/13 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: PEOPLE"
+            },
+            {
+                id: 13,
+                name: "🕶️",
+                title: "ARNETTE",
+                description: "Lentes originales con alma viajera.",
+                price: "$3,800",
+                badge: "All day",
+                image:"imgs/14 (1).jpg",
+                imageAlt:"imgs/14 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: ARNETTE"
+            },
+            {
+                id: 14,
+                name: "🕶️",
+                title: "RUSTY",
+                description: "Lentes originales que hablan de tu estilo sin decir una palabra.",
+                price: "$1800",
+                badge: "Clásico",
+                image:"imgs/15 (1).jpg",
+                imageAlt:"imgs/15 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: RUSTY"
+            },
+            {
+                id: 5,
+                name: "🕶️",
+                title: "VERSALLES",
+                description: "Calidad, confort y diseño sin límites.",
+                price: "$2,900",
+                badge: "Bestseller",
+                image:"imgs/06 (1).jpg",
+                imageAlt:"imgs/06 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: VERSALLES"
+            },
+            {
+                id: 15,
+                name: "🕶️",
+                title: "SEN NIÑO",
+                description: "Sol, estilo y confianza.",
+                price: "$500",
+                badge: "Bestseller",
+                image:"imgs/16 (1).jpg",
+                imageAlt:"imgs/16 (2).jpg", 
+                whatsappMessage: "Hola! Me interesa el producto: SEN NIÑO"
+            },
+            {
+                id: 16,
+                name: "🕶️",
+                title: "VETHDIA",
+                description: "Mirá el mundo con autenticidad.",
+                price: "$1000",
+                badge: "Trending",
+                image:"imgs/01 (1).jpg",
+                imageAlt:"imgs/01 (2).jpg",
+                whatsappMessage: "Hola! Me interesa el producto: VETHDIA"
             }
+        ];
+
+        // ============================================
+        // WHATSAPP CONFIGURATION
+        // ============================================
+        const WHATSAPP_NUMBER = "598094872605"; // Cambiar por tu número
+
+        // ============================================
+        // RENDER PRODUCTS
+        // ============================================
+        const slider = document.getElementById('slider');
+        const sliderDots = document.getElementById('sliderDots');
+
+        function createProductCard(product) {
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(product.whatsappMessage)}`;
+            
+            return `
+                <article class="product-card" data-product-id="${product.id}">
+                    <div class="image-container" data-image-container data-product-id="${product.id}">
+                        <img 
+                            data-src="${product.image}" 
+                            alt="${product.title}"
+                            class="product-image"
+                            loading="lazy"
+                        >
+                        <span class="product-badge">${product.badge}</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="product-name">${product.name}</p>
+                        <h2 class="product-title">${product.title}</h2>
+                        <p class="product-description">${product.description}</p>
+                        <p class="product-price">${product.price} <small>UYU</small></p>
+                        <a href="${whatsappUrl}" target="_blank" class="btn-whatsapp">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            Más info
+                        </a>
+                    </div>
+                </article>
+            `;
+        }
+
+        // Render all products
+        slider.innerHTML = products.map(product => createProductCard(product)).join('');
+
+        // Create dots
+        products.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => scrollToCard(index));
+            sliderDots.appendChild(dot);
+        });
+
+        // ============================================
+        // LAZY LOADING WITH INTERSECTION OBSERVER
+        // ============================================
+        const imageObserverOptions = {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0.01
         };
 
-        // Theme Toggle
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const container = entry.target;
+                    const img = container.querySelector('.product-image');
+                    const imgSrc = img.getAttribute('data-src');
+                    
+                    if (imgSrc) {
+                        img.src = imgSrc;
+                        img.onload = () => {
+                            img.classList.add('loaded');
+                            container.classList.add('loaded');
+                        };
+                        img.removeAttribute('data-src');
+                    }
+                    
+                    observer.unobserve(container);
+                }
+            });
+        }, imageObserverOptions);
+
+        // Observe all image containers
+        document.querySelectorAll('[data-image-container]').forEach(container => {
+            imageObserver.observe(container);
+        });
+
+        // ============================================
+        // SCROLL FUNCTIONALITY
+        // ============================================
+        const scrollLeft = document.getElementById('scrollLeft');
+        const scrollRight = document.getElementById('scrollRight');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateActiveDot() {
+            const scrollPosition = slider.scrollLeft;
+            const cardWidth = slider.querySelector('.product-card').offsetWidth;
+            const gap = parseInt(getComputedStyle(slider).gap) || 0;
+            const currentIndex = Math.round(scrollPosition / (cardWidth + gap));
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+
+            updateScrollIndicators();
+        }
+
+        function scrollToCard(index) {
+            const cardWidth = slider.querySelector('.product-card').offsetWidth;
+            const gap = parseInt(getComputedStyle(slider).gap) || 0;
+            slider.scrollTo({
+                left: index * (cardWidth + gap),
+                behavior: 'smooth'
+            });
+        }
+
+        function updateScrollIndicators() {
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            scrollLeft.classList.toggle('visible', slider.scrollLeft > 0);
+            scrollRight.classList.toggle('visible', slider.scrollLeft < maxScroll - 10);
+        }
+
+        scrollLeft.addEventListener('click', () => {
+            const cardWidth = slider.querySelector('.product-card').offsetWidth;
+            const gap = parseInt(getComputedStyle(slider).gap) || 0;
+            slider.scrollBy({
+                left: -(cardWidth + gap),
+                behavior: 'smooth'
+            });
+        });
+
+        scrollRight.addEventListener('click', () => {
+            const cardWidth = slider.querySelector('.product-card').offsetWidth;
+            const gap = parseInt(getComputedStyle(slider).gap) || 0;
+            slider.scrollBy({
+                left: cardWidth + gap,
+                behavior: 'smooth'
+            });
+        });
+
+        slider.addEventListener('scroll', updateActiveDot);
+        window.addEventListener('resize', updateScrollIndicators);
+
+        // Initial update
+        updateActiveDot();
+
+        // ============================================
+        // IMAGE OVERLAY FUNCTIONALITY
+        // ============================================
+        const overlay = document.getElementById('imageOverlay');
+        const overlayClose = document.getElementById('overlayClose');
+        const overlayImages = document.getElementById('overlayImages');
+        const overlayInfo = document.getElementById('overlayInfo');
+
+        function openOverlay(productId) {
+            const product = products.find(p => p.id === parseInt(productId));
+            if (!product) return;
+
+            // Create images HTML
+            overlayImages.innerHTML = `
+                <div class="overlay-image-container">
+                    <img src="${product.image}" alt="${product.title} - ⭐">
+                    <span class="overlay-image-label">⭐</span>
+                </div>
+                <div class="overlay-image-container">
+                    <img src="${product.imageAlt}" alt="${product.title} - 👽">
+                    <span class="overlay-image-label">👽</span>
+                </div>
+            `;
+
+            // Create info HTML
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(product.whatsappMessage)}`;
+            overlayInfo.innerHTML = `
+                <p class="product-name">${product.name}</p>
+                <h2 class="product-title">${product.title}</h2>
+                <p class="product-description">${product.description}</p>
+                <p class="product-price">${product.price} <small>UYU</small></p>
+                <a href="${whatsappUrl}" target="_blank" class="btn-whatsapp">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Consultar por WhatsApp
+                </a>
+            `;
+
+            // Show overlay
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOverlay() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners for overlay
+        overlayClose.addEventListener('click', closeOverlay);
+        
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeOverlay();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeOverlay();
+            }
+        });
+
+        // Add click event to all image containers
+        document.addEventListener('click', (e) => {
+            const imageContainer = e.target.closest('[data-image-container]');
+            if (imageContainer) {
+                const productId = imageContainer.getAttribute('data-product-id');
+                openOverlay(productId);
+            }
+        });
+
+        // ============================================
+        // CARD VISIBILITY OBSERVER (OPTIONAL)
+        // ============================================
+        const cardObserverOptions = {
+            root: slider,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'scale(1)';
+                }
+            });
+        }, cardObserverOptions);
+
+        document.querySelectorAll('.product-card, img').forEach(card => {
+            card.style.opacity = '0.5';
+            card.style.transform = 'scale(0.90)';
+            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            cardObserver.observe(card);
+        });
+		
+		  // Theme Toggle
         const themeToggle = document.querySelector('.theme-toggle');
         const html = document.documentElement;
         
@@ -648,80 +1295,17 @@
             });
         });
 		
-// Lazy loading avanzado con IntersectionObserver
-        // Lazy Loading Images
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.addEventListener('load', () => {
-                        img.classList.add('loaded');
-                    });
-                    observer.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '50px'
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-
-        // Modal
-        const modal = document.querySelector('.modal');
-        const modalClose = document.querySelector('.modal-close');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const productId = item.dataset.product;
-                const product = products[productId];
-                const img = item.querySelector('img');
-
-                document.querySelector('.modal-image').src = img.src;
-                document.querySelector('.modal-title').textContent = product.title;
-                document.querySelector('.modal-price').textContent = product.price;
-                document.querySelector('.modal-description').textContent = product.description;
-                
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
+		
+		  // Add rainbow animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
             }
-        });
-
-        // Form Submit
-        <!-- document.querySelector('.contact-form').addEventListener('submit', (e) => { -->
-            <!-- e.preventDefault(); -->
-            <!-- alert('¡Gracias por tu mensaje! Te contactaremos pronto.'); -->
-            <!-- e.target.reset(); -->
-        <!-- }); -->
-
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        `;
+        document.head.appendChild(style);
+		
     </script>
 </body>
 </html>
