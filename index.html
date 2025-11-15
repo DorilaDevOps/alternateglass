@@ -18,12 +18,12 @@
            CSS VARIABLES
         ============================================ */
         :root {
-            --color-primary: #450b6d;
+            --color-primary: #6b6d0b;
             --color-secondary: #ffffff;
             --color-text: #1a1a1a;
             --color-text-light: #666666;
             --color-border: #e0e0e0;
-            --color-bg: #0f141969;
+            --color-bg: #c6d2de69;
 			--verde_whatsapp:#25D366;
 			--verde_whatsapp_transparent:#25d36675;
 			--color_rosado:rgb(255, 155, 255);
@@ -38,7 +38,7 @@
 			 --transition2: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 		[data-theme="dark"] {
-            --color-primary: #1a202c;
+            --color-primary: #a5a5a5;
             --color-secondary: #2d3748;
             --color-accent: #cbd5e0;
             --color-text: #e2e8f0;
@@ -68,10 +68,10 @@
 			position:relative;
         }
 		h1{
-			font-size: 0.6em;-webkit-text-stroke-width: 0.7px;
-			-webkit-text-stroke-color: black;
+			font-size: 0.6em;-webkit-text-stroke-width: 0.5px;
+			-webkit-text-stroke-color: var(--color-secondary);
 			text-transform: uppercase;
-			text-shadow: rgb(0, 0, 0) 2px 2px 4px;
+			text-shadow: var(--color-secondary) 1px 1px 4px;
 			font-weight: 500;			
 			line-height: 1.2;
 			white-space: nowrap;
@@ -82,7 +82,7 @@
             font-size: 1.3em;
             margin-bottom: 2rem;
 			-webkit-text-stroke-color: black;
-			text-shadow: rgb(0, 0, 0) 1px 2px 2px;
+			text-shadow: var(--color-secondary) 1px 1px 4px;
             text-align: center;
             font-weight: 200;
         }
@@ -236,7 +236,7 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             gap: var(--spacing-md);
-            padding: var(--spacing-sm) 0;
+            padding: var(--spacing-xs) 0;
             scrollbar-width: none; /* Firefox */
             -ms-overflow-style: none; /* IE and Edge */
         }
@@ -387,6 +387,10 @@
         }
 		
 		/*-- section  -- MAIN   ---*/
+		main{
+			display: flex;
+			flex-direction: column;
+		}
 		section {
 			display: flex;
 			flex-direction: column;
@@ -394,9 +398,9 @@
             width: 90%;
             margin: 0 auto;
             padding: 3rem 0;
-			background: var(--color-overlay2);
-			opacity: 1;
-			transform: translateY(2px);
+			background: var(--color-secondary);
+			opacity: .6;
+			transform: translateY(-12px);
 			transition: opacity 0.6s, transform 0.6s;
         }
 		
@@ -468,6 +472,7 @@
             padding: 2rem 1rem;
             text-align: center;
             color: var(--color-text-light);
+			border-top:1px solid var(--color-text-light);
         }
 
         /* ============================================
@@ -477,8 +482,8 @@
             display: flex;
             justify-content: center;
             gap: var(--spacing-xs);
-            margin-top: var(--spacing-md);
-            padding: var(--spacing-sm) 0;
+            margin-top: var(--spacing-xs);
+            padding: var(--spacing-xs) 0;
         }
 
         .dot {
@@ -803,7 +808,7 @@
             </div>
         </div>
     </div>
-	<main style="display:flex;flex-direction:column;">
+	<main>
 	 <section id="contacto" class="contacto">
 		<h2 class="section-badge">Encontrá tu próximo par favorito</h2> 
             <h3>Contactanos  y que fluya</h3>
@@ -816,6 +821,9 @@
         </section>
     </main>
 	
+    <footer>
+        <p>&copy; 2025 Alternate Glass. 👽 <br>Todos los derechos reservados.</p>
+    </footer>
 	<!-- Botón WhatsApp flotante -->
     <a href="https://wa.me/598094872605" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -825,9 +833,6 @@
 										 </svg>
     </a>
 
-    <footer>
-        <p>&copy; 2025 Alternate Glass. 👽 <br> Todos los derechos reservados.</p>
-    </footer>
 	
 	
 
@@ -929,7 +934,7 @@
                 name: "🕶️",
                 title: "INFINIT",
                 description: "Lentes originales que hablan de tu estilo sin decir una palabra.",
-                price: "$900",
+                price: "$2600",
                 badge: "Bestseller",
                 image:"imgs/11 (1).jpg",
                 imageAlt:"imgs/11 (2).jpg", 
@@ -940,7 +945,7 @@
                 name: "🕶️",
                 title: "INFINIT",
                 description: "Un toque de sol, una dosis de actitud.",
-                price: "$3,200",
+                price: "$1000",
                 badge: "Trending",
                 image:"imgs/12 (1).jpg",
                 imageAlt:"imgs/12 (2).jpg",
@@ -1072,7 +1077,7 @@
         const imageObserverOptions = {
             root: null,
             rootMargin: '50px',
-            threshold: 0.01
+            threshold: 0.4
         };
 
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -1243,18 +1248,19 @@
             threshold: 0.5
         };
 
-        const cardObserver = new IntersectionObserver((entries) => {
+        const cardObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'scale(1)';
+                    entry.target.style.transform = 'scale(1.1)';
                 }
+				observer.unobserve(entry.target);
             });
         }, cardObserverOptions);
 
-        document.querySelectorAll('.product-card, img').forEach(card => {
-            card.style.opacity = '0.5';
-            card.style.transform = 'scale(0.90)';
+        document.querySelectorAll('.product-card, .product-image, .contacto').forEach(card => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(.9)';
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
             cardObserver.observe(card);
         });
