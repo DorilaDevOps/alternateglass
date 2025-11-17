@@ -57,6 +57,12 @@
             padding: 0;
             box-sizing: border-box;
         }
+		
+		 html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
 
         body {
             font-family: var(--font-sans);
@@ -749,6 +755,7 @@
             <ul class="nav-links">
                 <li><a href="#slider">Productos</a></li>
                 <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#garantia">by Kikiriya</a></li>
             </ul>
             <div class="nav-actions">
                 <button class="theme-toggle" aria-label="Cambiar tema">☀️</button>
@@ -762,6 +769,7 @@
         <ul>
             <li><a href="#slider">Productos</a></li>
             <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#garantia">by Kikiriya</a></li>
         </ul>
     </div>
 	
@@ -815,7 +823,7 @@
 						<div class="contact-details">
                         <p><strong>📞 </strong><a href="tel:094872605">094 872 605</a></p>
                         <p><strong>📩</strong> <a href="mailto:destinatario@ejemplo.com?subject=Hola&body=Informa%20Lentes">kikiriyadevops@gmail.com</a></p>
-                        
+                        <p id="garantia"><a href="KikiriyaDevOps.html"><strong>✨</strong><i>Garantia de Autenticidad</i></a></p>
                     </div>
 							
         </section>
@@ -1258,7 +1266,7 @@
             });
         }, cardObserverOptions);
 
-        document.querySelectorAll('.product-card, .product-image, .contacto').forEach(card => {
+        document.querySelectorAll('.product-card, .contacto').forEach(card => {
             card.style.opacity = '1';
             card.style.transform = 'scale(.9)';
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
