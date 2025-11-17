@@ -1313,7 +1313,10 @@
             });
         });
 		
-		
+		document.querySelector('.slider-wrapper').addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+				
 		  // Add rainbow animation
         const style = document.createElement('style');
         style.textContent = `
