@@ -942,6 +942,17 @@
                 whatsappMessage: "Hola! Me interesa el producto: VERSALLES"
             },
             {
+                id: 20,
+                name: "🕶️",
+                title: "Lentes Estenopeicos",
+                description: " gafas estenopeicas (o pinhole glasses) funcionan mediante un efecto óptico que concentra la luz que entra al ojo a través de una rejilla de pequeños agujeros. \nEsto dirige la luz directamente a la mácula, mejorando temporalmente la agudeza visual.",
+                price: "$1300",
+                badge: "Offer",
+                image:"imgs/lentes estenopeicos2.jpeg",
+                imageAlt:"lentes estenopeicos1.jpeg", 
+                whatsappMessage: "Hola! Me interesa las gafas estenopeicas "
+            },
+            {
                 id: 10,
                 name: "🕶️",
                 title: "INFINIT",
@@ -1280,6 +1291,7 @@
 		  // Theme Toggle
         const themeToggle = document.querySelector('.theme-toggle');
         const html = document.documentElement;
+		const elementoBody = document.body;
         
         const currentTheme = localStorage.getItem('theme') || 'light';
         html.setAttribute('data-theme', currentTheme);
@@ -1306,17 +1318,19 @@
         closeMenu.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
         });
+		mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
             });
         });
-		
 		document.querySelector('.slider-wrapper').addEventListener('click', () => {
             mobileMenu.classList.remove('active');
         });
-				
+		
 		  // Add rainbow animation
         const style = document.createElement('style');
         style.textContent = `
