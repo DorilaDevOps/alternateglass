@@ -26,16 +26,22 @@
             --color-bg: #c6d2de69;
 			--verde_whatsapp:#25D366;
 			--verde_whatsapp_transparent:#25d36675;
+			--yellow:yellow;
 			--color_rosado:rgb(39 24 39);
 			--color-overlay: rgba(0, 0, 0, 0.5);
 			--color-overlay2: rgb(241 231 243 / 50%);
+			--color-shadow: 1px 1px 9px 4px #bcbcbc;
             --spacing-xs: 0.5rem;
             --spacing-sm: 1rem;
             --spacing-md: 1.5rem;
             --spacing-lg: 2rem;
             --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+			--font-popins:"Poppins", Arial, sans-serif;
+			--font__playflare:"Playfair Display", serif;
             --transition: all 0.4s ease;
 			 --transition2: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			 --opacityContact):.5;
+			--translateContact:translateY(0px) scale(1);;
         }
 		[data-theme="dark"] {
             --color-primary: #a5a5a5;
@@ -44,6 +50,7 @@
             --color-text: #e2e8f0;
             --color-text-light: #a0aec0;
             --color-border: #4a5568;
+			--yellow:#ffff004a;
             --color-bg: #0f1419b3;
             --color-overlay: rgba(255, 255, 255, 0.1);
 			--color-overlay2:rgb(31 12 34 / 50%);
@@ -87,8 +94,8 @@
 			color:var(--color_rosado);
             font-size: 1.3em;
             margin-bottom: 2rem;
-			-webkit-text-stroke-color: black;
-			text-shadow: var(--color-secondary) 1px 1px 4px;
+			-webkit-text-stroke-color:var(--color-accent);
+			text-shadow: var(--color-accent) 1px 1px 2px;
             text-align: center;
             font-weight: 200;
         }
@@ -400,7 +407,8 @@
 		/*-- section  -- MAIN   ---*/
 		main{
 			display: flex;
-			flex-direction: column;
+			flex-direction: column;			
+			padding: .5rem 0;
 		}
 		section {
 			display: flex;
@@ -416,12 +424,19 @@
         }
 		
 		#contacto{
-			<!-- border:1px solid black; -->
-			<!-- opacity:.4; -->
+			
+		}
+		[data-contact="animado"]{
+			border:1px solid var(--yellow);
+			opacity:0;
+			transform:translateY(100%);
+		}
+		.animadoDos{
+			<!-- opacity:var(--opacityContact); -->
+			<!-- transform:var(--translateContact); -->
 		}
 		
-		#contact-details > p > a
-		#contact-details > p > a{color:red;}
+		
 		#contact-details > p > a:hover{}
 		#contact-details > p > a::after{
 			content:'';
@@ -489,9 +504,9 @@
             justify-content: center;
             font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px var(--color-shadow);
+            box-shadow: var(--color-shadow);
             z-index: 21;
-            transition: var(--transition-default);
+            transition: var(--transition);
         }
 		 .whatsapp-btn:hover {
             transform: translateY(-3px);
@@ -501,11 +516,15 @@
 
         /*---------- Footer ----------------------------------*/
         footer {
+			display:flex;
+			flex-direction:column;
+		    justify-content: center;
             background-color: var(--color-secondary);
             padding: 2rem 1rem;
             text-align: center;
             color: var(--color-text-light);
 			border-top:1px solid var(--color-text-light);
+			& p{font-family: var(--font__playflare);}
         }
 
         /* ============================================
@@ -759,6 +778,14 @@
 			h2 {
                 font-size: 2em;
             }
+			#contact-details > p > a{
+				letter-spacing:.3rem;
+			}
+			 footer {			
+				flex-direction:row;
+				gap:1rem;
+				& p{font-size:1.2em;font-style: oblique 10deg;}
+			}
         }
 
         @media (min-width: 1280px) {
@@ -844,8 +871,8 @@
         </div>
     </div>
 	<main>
-	 <section id="contacto" class="contacto">
-		<h2 class="section-badge"><strong>Encontrá tu próximo par favorito<strong></h2> 
+	 <section id="contacto" class="contacto" data-contact="animado">
+		<h2 class="section-badge"><strong>Encontrá tu próximo par favorito</strong></h2> 
             <h3>Contactanos  y que fluya</h3>
 						<div class="contact-details" id="contact-details">
                         <p><strong>📞 </strong><a href="tel:094872605">094 872 605</a></p>
@@ -857,7 +884,8 @@
     </main>
 	
     <footer>
-        <p>&copy; 2025 Alternate Glass. 👽 <br>Todos los derechos reservados.</p>
+        <p>&copy; 2025 Alternate Glass. 👽✨</p>
+		<p>Todos los derechos reservados.</p>
     </footer>
 	<!-- Botón WhatsApp flotante -->
     <a href="https://wa.me/598094872605" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
@@ -1307,7 +1335,7 @@
                     <!-- entry.target.style.border = '1px solid blue'; -->
                     <!-- entry.target.style.transform = 'scale(1)'; -->
                 }
-				observer.unobserve(entry.target);
+				observer.unobserve(entry);
             });
         }, cardObserverOptions);
 
@@ -1318,32 +1346,31 @@
             cardObserver.observe(card);
         });
 		
-		//invento observer contacto
-		
+		//--------------------------------------------------------------
+		//------------invento observer contacto	-------------------------
+		// root: document.querySelector('main'),		
 		const caontactObserverOptions = {
-            root: document.querySelector('main'),
+            root: null,
             rootMargin: '0px',
-            threshold: 1
+            threshold: .1
         };
 		const contactObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-			console.log('co--->'+ co.id + entry);
+			<!-- console.log('co--->'+ co.id + entry + "DATA" + co.dataset.contact); -->
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    <!-- entry.target.style.border = '1px solid blue'; -->
-                    entry.target.transform = 'scale(1)';
-                    <!-- entry.target.style.transform = 'scale(1)'; -->
-		console.log("Co entry 1 -"+entry);
+                    entry.target.style.transform = 'scale(1)';
+                    entry.target.style.transform= 'translateY(0)';
+				entry.target.classList.add('animadoDos');
+		console.log("Co entry SI -"+entry.isIntersecting);
                 }
-				console.log("Co entry 2 -"+entry);
-				observer.unobserve(entry.target);
+		console.log("Co entry NO -"+entry.isIntersecting);
+				observer.unobserve(entry);
             });
         }, caontactObserverOptions);
 
         const co = document.getElementById('contacto');
-		console.log("Co-" + co.id);
-			co.style.opacity = '1';
-            co.style.transition = 'opacity .5s ease, transform 0.4s ease';
+		
             contactObserver.observe(co);
 			
 		
