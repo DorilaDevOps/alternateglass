@@ -242,7 +242,8 @@
         .slider {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
+            scroll-snap-type: x mandatory; /* Obliga el scroll horizontal */
+			white-space: nowrap; /* Para que los elementos no se apilen */
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             gap: var(--spacing-md);
@@ -414,6 +415,28 @@
 			transition: opacity 0.6s, transform 0.6s;
         }
 		
+		#contacto{
+			<!-- border:1px solid black; -->
+			<!-- opacity:.4; -->
+		}
+		
+		#contact-details > p > a
+		#contact-details > p > a{color:red;}
+		#contact-details > p > a:hover{}
+		#contact-details > p > a::after{
+			content:'';
+			display:block;
+			width: 0%;
+			height: 2px;
+			background-color: var(--color-text-light);
+			transition: width 0.3s ease-in-out;
+		}
+		#contact-details > p > a:hover::after{ 
+			width: 100%; 
+			margin:0 20px;
+			/* Ancho completo al hacer hover */
+		}
+		
 
         /* ============================================
            BUTTON
@@ -516,7 +539,7 @@
         ============================================ */
         .scroll-indicator {
             position: absolute;
-            top: 50%;
+            bottom: 25%;
             transform: translateY(-50%);
             width: 40px;
             height: 40px;
@@ -544,11 +567,11 @@
         }
 
         .scroll-indicator.left {
-            left: var(--spacing-sm);
+            left: var(--spacing-xs);
         }
 
         .scroll-indicator.right {
-            right: var(--spacing-sm);
+            right: var(--spacing-xs);
         }
 
         /* ============================================
@@ -778,8 +801,8 @@
     </div>
 	
     <div class="slider-wrapper">
-	<h2> <strong>Colección actual disponible</strong></h2>
-	<h3> Shop the Look</h3>
+		<h2> <strong>Colección actual disponible</strong></h2>
+		<h3> Shop the Look</h3>
         <div class="slider-container">
             <!-- Scroll Indicators -->
             <button class="scroll-indicator left" id="scrollLeft" aria-label="Scroll left">
@@ -824,7 +847,7 @@
 	 <section id="contacto" class="contacto">
 		<h2 class="section-badge"><strong>Encontrá tu próximo par favorito<strong></h2> 
             <h3>Contactanos  y que fluya</h3>
-						<div class="contact-details">
+						<div class="contact-details" id="contact-details">
                         <p><strong>📞 </strong><a href="tel:094872605">094 872 605</a></p>
                         <p><strong>📩</strong> <a href="mailto:destinatario@ejemplo.com?subject=Hola&body=Informa%20Lentes">kikiriyadevops@gmail.com</a></p>
                         <p id="garantia"><a href="KikiriyaDevOps.html"><strong>✨</strong><i>Garantia de Autenticidad</i></a></p>
@@ -1114,7 +1137,12 @@
                         img.src = imgSrc;
                         img.onload = () => {
                             img.classList.add('loaded');
+							img.dataset.numeroCategoria="101";
+							img.dataset.type = 'producto';
                             container.classList.add('loaded');
+							
+							<!-- console.log("DATA ATRIBUTO:" + imgSrc); -->
+							<!-- console.log("DATA img:" + img.dataset); -->
                         };
                         img.removeAttribute('data-src');
                     }
@@ -1141,7 +1169,7 @@
             const cardWidth = slider.querySelector('.product-card').offsetWidth;
             const gap = parseInt(getComputedStyle(slider).gap) || 0;
             const currentIndex = Math.round(scrollPosition / (cardWidth + gap));
-            
+            <!-- console.log("GAP"+cardWidth+ "PX"+gap); -->
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
@@ -1265,28 +1293,59 @@
         // ============================================
         // CARD VISIBILITY OBSERVER (OPTIONAL)
         // ============================================
+		const sliderArticles = document.querySelector('.slider');
         const cardObserverOptions = {
-            root: slider,
-            rootMargin: '0px',
-            threshold: 0.5
+            root: sliderArticles,
+            rootMargin: '20px',
+            threshold: 0.4
         };
 
         const cardObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'scale(1.1)';
+                    <!-- entry.target.style.border = '1px solid blue'; -->
+                    <!-- entry.target.style.transform = 'scale(1)'; -->
                 }
 				observer.unobserve(entry.target);
             });
         }, cardObserverOptions);
 
-        document.querySelectorAll('.product-card, .contacto').forEach(card => {
-            card.style.opacity = '1';
-            card.style.transform = 'scale(.9)';
-            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        document.querySelectorAll('.product-card').forEach(card=> {
+		<!-- card.style.opacity = '1'; -->
+            <!-- card.style.transform = 'scale(.9)'; -->
+            card.style.transition = 'opacity .5s ease, transform 0.4s ease';
             cardObserver.observe(card);
         });
+		
+		//invento observer contacto
+		
+		const caontactObserverOptions = {
+            root: document.querySelector('main'),
+            rootMargin: '0px',
+            threshold: 1
+        };
+		const contactObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+			console.log('co--->'+ co.id + entry);
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    <!-- entry.target.style.border = '1px solid blue'; -->
+                    entry.target.transform = 'scale(1)';
+                    <!-- entry.target.style.transform = 'scale(1)'; -->
+		console.log("Co entry 1 -"+entry);
+                }
+				console.log("Co entry 2 -"+entry);
+				observer.unobserve(entry.target);
+            });
+        }, caontactObserverOptions);
+
+        const co = document.getElementById('contacto');
+		console.log("Co-" + co.id);
+			co.style.opacity = '1';
+            co.style.transition = 'opacity .5s ease, transform 0.4s ease';
+            contactObserver.observe(co);
+			
 		
 		  // Theme Toggle
         const themeToggle = document.querySelector('.theme-toggle');
